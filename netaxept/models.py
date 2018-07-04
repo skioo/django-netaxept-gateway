@@ -22,6 +22,8 @@ class Payment(TransactionBase):
     amount = models.PositiveIntegerField()
     currency_code = models.CharField(max_length=3)
     description = models.CharField(max_length=255, null=True, blank=True)
+    redirect_url = models.CharField(max_length=255)
+    auto_auth = models.BooleanField()
 
     def __str__(self):
         return '{} {} - {}'.format(self.amount, self.currency_code, self.transaction_id)

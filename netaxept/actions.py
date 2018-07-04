@@ -1,8 +1,8 @@
 import suds
 from structlog import get_logger
 
-from ..gateway import do_register, do_process
-from ..models import Payment, Operation
+from .gateway import do_register, do_process
+from .models import Payment, Operation
 
 logger = get_logger()
 
@@ -52,7 +52,9 @@ def register(order_number, amount, currency_code, redirect_url, description=None
         amount=amount,
         currency_code=currency_code,
         order_number=order_number,
-        description=description
+        description=description,
+        redirect_url=redirect_url,
+        auto_auth=auto_auth
     )
     try:
         response = do_register(
@@ -60,8 +62,8 @@ def register(order_number, amount, currency_code, redirect_url, description=None
             amount=payment.amount,
             currency_code=payment.currency_code,
             description=payment.description,
-            redirect_url=redirect_url,
-            auto_auth=auto_auth)
+            redirect_url=payment.redirect_url,
+            auto_auth=payment.auto_auth)
         payment.transaction_id = response.TransactionId
         payment.success = True
     except suds.WebFault as e:
@@ -161,7 +163,7 @@ def credit(payment_id, amount=None):
 def _handle_operation(operation):
     try:
         # XXX: Should read the response and not only rely on the REST exception.
-        response = do_process(
+        do_process(
             transaction_id=operation.transaction_id,
             operation=operation.operation,
             amount=getattr(operation, 'amount', None),

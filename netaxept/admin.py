@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils.html import format_html
 
-from .actions import payments
+from . import actions
 from .models import Payment, Operation
 
 
@@ -57,7 +57,7 @@ def auth_payment_form(request, payment_id):
     if request.method == 'POST':
         form = AuthPaymentForm(request.POST)
         if form.is_valid():
-            result = payments.auth(
+            result = actions.auth(
                 payment_id=payment_id)
             # As confirmation we take the user to the edit page of the auth operation.
             return HttpResponseRedirect(reverse('admin:netaxept_operation_change', args=[result.id]))
@@ -85,7 +85,7 @@ def capture_payment_form(request, payment_id):
     if request.method == 'POST':
         form = CapturePaymentForm(request.POST)
         if form.is_valid():
-            result = payments.capture(
+            result = actions.capture(
                 payment_id=payment_id,
                 amount=form.cleaned_data['amount'])
             # As confirmation we take the user to the edit page of the capture operation.
@@ -114,7 +114,7 @@ def credit_payment_form(request, payment_id):
     if request.method == 'POST':
         form = CreditPaymentForm(request.POST)
         if form.is_valid():
-            result = payments.credit(
+            result = actions.credit(
                 payment_id=payment_id,
                 amount=form.cleaned_data['amount'])
             # As confirmation we take the user to the edit page of the credit operation.
@@ -136,8 +136,8 @@ def credit_payment_form(request, payment_id):
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
     date_hierarchy = 'created'
-    list_display = ['created', 'success', 'amount', 'currency_code', 'order_number', 'description', 'transaction_id',
-                    operation_count]
+    list_display = ['created', 'success', 'amount', 'currency_code', 'order_number', 'description', 'redirect_url',
+                    'transaction_id', operation_count]
     search_fields = ['transaction_id', 'order_number', 'amount', 'description']
     list_filter = ['success', 'currency_code']
 

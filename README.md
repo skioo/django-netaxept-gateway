@@ -1,13 +1,13 @@
 django-netaxept-gateway
 ======================= 
 
-Tested on python 3.5 and django 2.0.4
+Tested on python 3.5 and django 2.0.7
 
 
 Installation
 ------------
 
-    pip install -e git+git://github.com/skioo/django-netaxept-gateway.git#egg=django-netaxept-gateway
+    pip install django-netaxept-gateway
 
 
 Configuration
@@ -33,7 +33,7 @@ IMPORTANT
 
 - Amounts are in smallest currenty unit. For instance one NOK is represented in netaxept as "100 NOK".
 
-- Payment objects have a `success` field that indicated whether the payment was _registered_ without error, it says nothing about whether we got the money or not
+- Payment objects have a `success` field that indicate whether the payment was _registered_ without error, it says nothing about whether we got the money or not
 (To receive money the payment needs to go thru `auth` then `capture` , or thru `sale`).
 
 
@@ -49,7 +49,6 @@ API details: https://shop.nets.eu/web/partners/appi
 Test card numbers: https://shop.nets.eu/web/partners/test-cards
 
 
-
 Design
 ------
 
@@ -59,10 +58,8 @@ We don't allow payment registration with `autoSale` because it becomes very diff
 TODO
 ----
 
-- Unit tests that pass, and that cover most of the functionality.
+- Unit tests
 - On prod (where debug is turned off), errors in the admin after invoking the gateway are shown as a useless grey page.
-- Store in the database the callback url requested by a payment.
-- Store in the database that a payment requested-auto-auth.
 
 
 To work on this code

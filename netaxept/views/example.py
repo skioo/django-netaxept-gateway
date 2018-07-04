@@ -9,7 +9,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
 from netaxept.gateway import get_payment_terminal_url
-from ..actions.payments import register
+from ..actions import register
 
 
 class PayForm(forms.Form):
