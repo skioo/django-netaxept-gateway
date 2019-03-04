@@ -1,7 +1,16 @@
 django-netaxept-gateway
 ======================= 
 
-Tested on python 3.5 and django 2.0.7
+[![Build Status](https://travis-ci.org/skioo/django-netaxept-gateway.svg?branch=master)](https://travis-ci.org/skioo/django-netaxept-gateway)
+[![PyPI version](https://badge.fury.io/py/django-netaxept-gateway.svg)](https://badge.fury.io/py/django-netaxept-gateway)
+[![Requirements Status](https://requires.io/github/skioo/django-netaxept-gateway/requirements.svg?branch=master)](https://requires.io/github/skioo/django-netaxept-gateway/requirements/?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+Requirements
+------------
+
+* Python: 3.6 and over
+* Django: 2.0 and over
 
 
 Installation
@@ -62,8 +71,18 @@ TODO
 - On prod (where debug is turned off), errors in the admin after invoking the gateway are shown as a useless grey page.
 
 
-To work on this code
---------------------
+Development
+-----------
+
+To install all dependencies:
 
     pip install -e .
+
+
+To run tests:
+
+    pip install pytest-django
+    pytest
+    
+
 

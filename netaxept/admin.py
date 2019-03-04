@@ -20,7 +20,7 @@ def link_to_payment(obj):
         text)
 
 
-link_to_payment.short_description = 'Payment'
+link_to_payment.short_description = 'Payment'  # type: ignore
 
 
 @admin.register(Operation)
@@ -176,7 +176,7 @@ class PaymentAdmin(admin.ModelAdmin):
         else:
             return '-'
 
-    auth_button.short_description = 'Auth'
+    auth_button.short_description = 'Auth'  # type: ignore
 
     def capture_button(self, obj):
         if obj.success:
@@ -185,7 +185,7 @@ class PaymentAdmin(admin.ModelAdmin):
         else:
             return '-'
 
-    capture_button.short_description = 'Capture'
+    capture_button.short_description = 'Capture'  # type: ignore
 
     def credit_button(self, obj):
         if obj.success:
@@ -194,4 +194,4 @@ class PaymentAdmin(admin.ModelAdmin):
         else:
             return '-'
 
-    credit_button.short_description = 'Credit'
+    credit_button.short_description = 'Credit'  # type: ignore
