@@ -13,7 +13,7 @@ setup(
     url=netaxept.__URL__,
     download_url='https://pypi.python.org/pypi/django-datatrans-gateway',
     install_requires=[
-        'Django>=2.0,<2.2',
+        'Django>=2.0',
         'structlog',
         'suds2',
         'requests',
